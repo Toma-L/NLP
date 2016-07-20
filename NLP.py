@@ -162,6 +162,18 @@ fdist.max()
 fdist[3]
 fdist.freq(3)
 
+fdist['monstrous']
+fdist.N()
+fdist.tabulate()
+fdist.plot()
+fdist.max()
+fdist.plot(cumulative = True)
+fdist1 < fdist2
+
+
+#1.4
+
+sent7
 [w for w in sent7 if len(w) < 4]
 [w for w in sent7 if len(w) <= 4]
 [w for w in sent7 if len(w) == 4]
@@ -182,3 +194,41 @@ sorted([term for term in set(text4) if 'gnt' in term])
 sorted([item for item in set(text6) if item.istitle()])
 sorted([item for item in set(sent7) if item.isdigit()])
 
+sorted([w for w in set(text7) if '-' in w and 'index' in w])
+sorted([wd for wd in set(text3) if wd.istitle() and len(wd) > 10])
+sorted([t for t in set(text2) if 'cie' in t or 'cei' in t])
+
+[len(w) for w in text1]
+[w.upper() for w in text1]
+
+len(text1)
+len(set(text1))
+len(set([word.lower() for word in text1])) #eliminate the difference between upper & lower
+len(set([word.lower() for word in text1 if word.isalpha()])) #only alpha left
+
+word = 'cat'
+if len(word) < 5:
+    print ('word length is less than 5')
+
+if len(word) >=5:
+    print ('word length is greater than or equal to 5')
+
+for word in ['Call', 'me', 'Ishmael', '.']:
+    print (word)
+
+sent1 = ['Call', 'me', 'Ishmael', '.']
+for xyzzy in sent1:
+    if xyzzy.endswith('l'):
+        print (xyzzy)
+
+for token in sent1:
+    if token.islower():
+        print (token, 'is a lowercase word')
+    elif token.istitle():
+        print (token, 'is a titlecase word')
+    else:
+        print (token, 'is punctuation')
+
+tricky = sorted([w for w in set(text2) if 'cie' in w or 'cei' in w])
+for word in tricky:
+    print (word),
