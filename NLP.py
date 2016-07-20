@@ -1,6 +1,6 @@
 #Natural Language Processing with Python
 
-#1.1
+#1.1====================
 
 import nltk
 #nltk.download()
@@ -42,7 +42,7 @@ percentage(4, 5)
 percentage(text4.count('a'), len(text4))
 
 
-#1.2
+#1.2====================
 
 sent1 = ["Call", "me", "Ishmael", "."]
 sent1
@@ -109,7 +109,7 @@ name + "!"
 "Monty Python".split()
 
 
-#1.3
+#1.3====================
 
 saying = ["After", "all", "is", "said", "and", "done", "more", "is", "said", "than", "done"]
 tokens = set(saying)
@@ -171,7 +171,7 @@ fdist.plot(cumulative = True)
 fdist1 < fdist2
 
 
-#1.4
+#1.4====================
 
 sent7
 [w for w in sent7 if len(w) < 4]
@@ -232,3 +232,7 @@ for token in sent1:
 tricky = sorted([w for w in set(text2) if 'cie' in w or 'cei' in w])
 for word in tricky:
     print (word),
+
+
+#2.1====================
+
