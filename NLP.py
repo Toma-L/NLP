@@ -121,7 +121,7 @@ fdist1
 vocabulary1 = list(fdist1.keys())
 vocabulary1[:50] #Freq top 50 words
 
-fdist1["whale"]
+fdist1['whale']
 
 
 fdist2 = FreqDist(text2)
@@ -148,4 +148,37 @@ sorted([w for w in set(text5) if len(w) > 7 and fdist5[w] > 7]) #nchar > 7 and f
 
 list(bigrams(['more', 'is', 'said', 'than', 'done'])) #bigrams() isn't working! WHY
 
+
+text4.collocations()
+text8.collocations()
+
+[len(w) for w in text1]
+fdist = FreqDist([len(w) for w in text1])
+fdist
+fdist.keys()
+
+fdist.items()
+fdist.max()
+fdist[3]
+fdist.freq(3)
+
+[w for w in sent7 if len(w) < 4]
+[w for w in sent7 if len(w) <= 4]
+[w for w in sent7 if len(w) == 4]
+[w for w in sent7 if len(w) != 4]
+
+sent7[0].startswith("P")
+sent7[0].endswith("t")
+"e" in sent7[0]
+sent7[0].islower()
+sent7[0].isupper()
+sent7[0].isalpha()
+sent7[0].isalnum()
+sent7[3].isdigit()
+sent7[0].istitle()
+
+sorted([w for w in set(text1) if w.endswith('ableness')])
+sorted([term for term in set(text4) if 'gnt' in term])
+sorted([item for item in set(text6) if item.istitle()])
+sorted([item for item in set(sent7) if item.isdigit()])
 
