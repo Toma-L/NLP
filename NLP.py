@@ -339,3 +339,91 @@ words[1:20]
 sents = gutenberg.sents("burgess-busterbrown.txt")
 sents[1:20]
 
+from nltk.corpus import PlaintextCorpusReader
+corpus_root = '' #yourown file
+wordlists = PlaintextCorpusReader(corpus_root, '.*')
+wlrdlists.fileids()
+wordlists.words('connectives')
+
+from nltk.corpus import BracketParseCorpusReader
+corpus_root = r""
+file_pattern = r".*/wsj_.*\.mrg"
+ptb = BracketParseCorpusReader(corpus_root, file_pattern)
+ptb.fileids()
+len(ptb.sents())
+ptb.sents(fileids = '20/wsj_2013.mrg')[19]
+
+
+#2.2====================
+
+text = ['The', 'Fulton', 'County', 'Grand', 'Jury', 'said', ...]
+pairs = [('news', 'The'), ('news', 'Fulton'), ('news', 'County'), ...]
+
+import nltk
+from nltk.corpus import brown
+cfd = nltk.ConditionalFreqDist(
+        (genre, word)
+        for genre in brown.categories()
+        for word in brown.words(categories = genre))
+
+genre_word = [(genre, word)
+                for genre in ['news', 'romance']
+                for word in brown.words(categories = genre)]
+                    
+len(genre_word)
+
+genre_word[:4]
+genre_word[-4:]
+
+cfd = nltk.ConditionalFreqDist(genre_word)
+cfd
+
+cfd.conditions()
+
+cfd['news']
+cfd['romance']
+list(cfd['romance'])
+cfd['romance']['could']
+
+from nltk.corpus import inaugural
+cfd = nltk.ConditionalFreqDist(
+        (target, fileid[:4])
+        for fileid in inaugural.fileids()
+        for w in inaugural.words(fileid)
+        for target in ['america', 'citizen']
+        if w.lower().startswith(target))
+
+from nltk.corpus import udhr
+languages = ['Chickasaw', 'English', 'German_Deutsch',
+             'Greenlandic_Inuktikut', 'Hungarian_Magyar', 'Ibibio_Efik']
+cfd = nltk.ConditionalFreqDist(
+        (lang, len(word))
+        for lang in languages
+        for word in udhr.words(lang + '-Latin1'))
+cfd
+
+cfd.tabulate(conditions = ['English', 'German_Deutsch'], samples = range(10), cumulative = True)
+
+
+#showyourwork / p.58
+genre_word = [(genre, word)
+                for genre in ['news', 'romance']
+                for word in brown.words(categories = genre)]
+cfd = nltk.ConditionalFreqDist(genre_word)
+days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+cfd.tabulate(samples = days)
+
+
+sent = ['In', 'the', 'beginning', 'God', 'created', 'the', 'heaven', 'and', 'the', 'earth', '.']
+nltk.bigrams(sent) #doesn't work
+
+def generate_model(cfdist, word, num = 15):
+    for i in range(num):
+        print (word),
+        word = cfdist[word].max()
+text = nltk.corpus.genesis.words('english-kjv.txt')
+bigrams = nltk.bigrams(text)
+cfd = nltk.ConditionalFreqDist(bigrams)
+
+print (cfd['living'])
+generate_model(cfd, 'living')
