@@ -427,3 +427,89 @@ cfd = nltk.ConditionalFreqDist(bigrams)
 
 print (cfd['living'])
 generate_model(cfd, 'living')
+
+
+#2.3====================
+
+from __future__ import division
+def lexical_diversity(my_text_data):
+    word_count = len(my_text_data)
+    vocab_size = len(set(my_text_data))
+    diversity_score = word_count / vocab_size
+    return diversity_score
+
+def plural(word):
+    if word.endswith('y'):
+        return word[:-1] + 'ies'
+    elif word[-1] in 'sx' or word[-2:] in ['sh', 'ch']:
+        return word + 'es'
+    elif word.endswith('an'):
+        return word[:-2] + 'en'
+    else:
+        return word + 's'
+
+plural('fairy')
+plural('woman')
+
+plural('wish')
+plural('fan') #incorrect
+
+
+#2.4====================
+
+def unusual_words(text):
+    text_vocab = set(w.lower() for w in text if w.isalpha())
+    english_vocab = set(w.lower() for w in nltk.corpus.words.words())
+    unusual = text_vocab.difference(english_vocab)
+    return sorted(unusual)
+
+unusual_words(nltk.corpus.gutenberg.words('austen-sense.txt'))
+unusual_words(nltk.corpus.nps_chat.words())
+
+from nltk.corpus import stopwords
+stopwords.words('english')
+
+def content_fraction(text):
+    stopwords = nltk.corpus.stopwords.words('english')
+    content = [w for w in text if w.lower() not in stopwords]
+    return len(content) / len(text)
+
+content_fraction(nltk.corpus.reuters.words())
+
+
+puzzle_letters = nltk.FreqDist('egivrvonl')
+obligatory = 'r'
+wordlist = nltk.corpus.words.words()
+[w for w in wordlist if len(w) >= 6
+                        and obligatory in w
+                        and nltk.FreqDist(w) <= puzzle_letters]
+
+names = nltk.corpus.names
+names.fileids()
+male_names = names.words('male.txt')
+female_names = names.words('female.txt')
+[w for w in male_names if w in female_names]
+
+cfd = nltk.ConditionalFreqDist(
+            (fileid, name[-1])
+            for fileid in names.fileids()
+            for name in names.words(fileid))
+cfd.plot()
+
+entries = nltk.corpus.cmudict.entries()
+len(entries)
+for entry in entries[39943:39951]:
+    print (entry)
+
+for word, pron in entries:
+    if len(pron) == 3:
+        ph1, ph2, ph3 = pron
+        if ph1 == 'P' and ph3 == 'T':
+            print (word, ph2,)
+
+syllable = ['N', 'IHO', 'K', 'S']
+[word for word, pron in entries if pron[-4:] == syllable]
+
+[w for w, pron in entries if pron[-1] == 'M' and w[-1] == 'n']
+
+sorted(set(w[:2] for w, pron in entries if pron[0] == 'N' and w[0] != 'n'))
